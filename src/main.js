@@ -11,26 +11,24 @@ const followingClick = () => {
 }
 
 const main = async () => {
-    await new Promise(s => setTimeout(s, 100));
-    let forYouElm = document.querySelector(forYouSelector);
-    let followElm = document.querySelector(followingSelector);
-    if (!forYouElm || !followElm) {
-        for (i = 1; i < 11; i++) {
-            await new Promise(s => setTimeout(s, i * 100));
-            if (!forYouElm) {
-                forYouElm = document.querySelector(forYouSelector);
-            }
-            if (!followElm) {
-                followElm = document.querySelector(followingSelector);
-            }
-            if (forYouElm && followElm) {
-                break;
-            }
+    let forYouElm;
+    let followElm;
+    for (i = 1; i < 11; i++) {
+        await new Promise(s => setTimeout(s, i * 100));
+        if (!forYouElm) {
+            forYouElm = document.querySelector(forYouSelector);
         }
-        if (!forYouElm || !followElm) {
-            return;
+        if (!followElm) {
+            followElm = document.querySelector(followingSelector);
+        }
+        if (forYouElm && followElm) {
+            break;
         }
     }
+    if (!forYouElm || !followElm) {
+        return;
+    }
+
     forYouElm.addEventListener('click', forYouClick);
     followElm.addEventListener('click', followingClick);
 
